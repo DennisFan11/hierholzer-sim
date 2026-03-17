@@ -7,3 +7,20 @@ script = ExtResource("1_4pay7")
 
 [node name="Line2D" type="Line2D" parent="." unique_id=396799672]
 unique_name_in_owner = true
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=144547997]
+unique_name_in_owner = true
+top_level = true
+
+[node name="Label" type="RichTextLabel" parent="Marker2D" unique_id=1676194702]
+unique_name_in_owner = true
+offset_left = -82.0
+offset_top = -51.0
+offset_right = 85.0
+offset_bottom = 49.0
+theme_override_constants/shadow_outline_size = 4
+theme_override_constants/outline_size = 4
+bbcode_enabled = true
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1

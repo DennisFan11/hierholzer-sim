@@ -19,3 +19,12 @@ var vertex_b: Vertex:
 
 ## 客製化資料
 var data: Dictionary = {}
+
+
+func another(vertex: Vertex)-> Vertex:
+	if vertex == vertex_a:
+		return vertex_b
+	if vertex == vertex_b:
+		return vertex_a
+	push_error("vertex not linked !")
+	return null

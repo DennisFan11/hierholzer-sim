@@ -9,7 +9,7 @@ extends Node2D
 @export var repulsion_force: float = 3000.0
 
 ## 彈簧理想長度 (相連節點之間的預期距離)
-@export var spring_length: float = 100.0
+@export var spring_length: float = 200.0
 
 ## 彈簧彈力係數 (拉扯回理想長度的力道)
 @export var spring_stiffness: float = 4.0

@@ -16,13 +16,57 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="case30" type="Button" parent="CanvasLayer/Control" unique_id=1253659602]
+[node name="Next" type="Button" parent="CanvasLayer/Control" unique_id=564687129]
+unique_name_in_owner = true
 layout_mode = 0
-offset_left = 39.0
-offset_top = 45.0
-offset_right = 192.0
-offset_bottom = 76.0
-text = "30 vertex test data"
+offset_left = 576.0
+offset_top = 17.0
+offset_right = 625.0
+offset_bottom = 48.0
+text = "NEXT"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control" unique_id=1558421738]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 23.0
+offset_top = 24.0
+offset_right = -957.0
+offset_bottom = -139.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer" unique_id=1950078959]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Test Data"
+
+[node name="case6" type="Button" parent="CanvasLayer/Control/VBoxContainer" unique_id=1005616507]
+layout_mode = 2
+text = "6 vertex"
+
+[node name="case10" type="Button" parent="CanvasLayer/Control/VBoxContainer" unique_id=2031220082]
+layout_mode = 2
+text = "10 vertex"
+
+[node name="case20" type="Button" parent="CanvasLayer/Control/VBoxContainer" unique_id=1253659602]
+layout_mode = 2
+text = "20 vertex"
+
+[node name="custom" type="Button" parent="CanvasLayer/Control/VBoxContainer" unique_id=1279396355]
+layout_mode = 2
+text = "custom"
+
+[node name="LineEdit" type="TextEdit" parent="CanvasLayer/Control/VBoxContainer" unique_id=621811558]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(104.14, 300)
+layout_mode = 2
+placeholder_text = "Input data
+格式:
+int # vertex count
+int # edge count
+int int # edge"
 
 [node name="ForceGraph" type="Node2D" parent="." unique_id=1329134909]
 unique_name_in_owner = true
@@ -32,4 +76,8 @@ metadata/_custom_type_script = "uid://bumhy3mrmss24"
 [node name="Camera2D" type="Camera2D" parent="." unique_id=325616736]
 zoom = Vector2(0.51, 0.51)
 
-[connection signal="pressed" from="CanvasLayer/Control/case30" to="." method="_on_case_30_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/Next" to="." method="_on_next_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/case6" to="." method="_on_case_6_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/case10" to="." method="_on_case_10_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/case20" to="." method="_on_case_20_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/custom" to="." method="_on_custom_pressed"]

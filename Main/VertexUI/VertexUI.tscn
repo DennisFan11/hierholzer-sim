@@ -2,10 +2,20 @@
 
 [ext_resource type="Script" uid="uid://mlvf64oshca8" path="res://Main/VertexUI/vertex_ui.gd" id="1_4xkr3"]
 [ext_resource type="Texture2D" uid="uid://d1ki5imqgkqfk" path="res://icon.svg" id="1_b3ula"]
+[ext_resource type="Shader" uid="uid://c2vqw2wdbfr0f" path="res://Main/VertexUI/VertexUI.gdshader" id="2_6npx4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hcdvc"]
+resource_local_to_scene = true
+shader = ExtResource("2_6npx4")
+shader_parameter/circle_color = Color(1, 1, 1, 1)
+shader_parameter/radius = 0.45
+shader_parameter/smoothing = 0.05
 
 [node name="VertexUi" type="Node2D" unique_id=1465476548]
 script = ExtResource("1_4xkr3")
 
 [node name="Icon" type="Sprite2D" parent="." unique_id=2064957548]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_hcdvc")
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_b3ula")
