@@ -23,4 +23,4 @@ func _process(delta: float) -> void:
 
 	## 已回收
 	if edge.data.get("SEQ", -1) != -1:
-		%Line2D.modulate = Color.AQUA
+		%Line2D.modulate = Color(1.0, 1.0, 1.0, 0.3)

@@ -12,6 +12,8 @@ func _ready() -> void:
 
 ## 清理 連線
 func new_graph():
+	await get_tree().process_frame
+	
 	if is_instance_valid(_graph):
 		_graph.clear()
 
@@ -49,22 +51,31 @@ var sql: int
 var starting: bool = false
 signal next
 
-func step():
+var to_end: bool = false
+
+func step(to_end: bool=false):
+	self.to_end = to_end
+	
 	if not starting:
 		starting = true
 		sql = 0
-		dfs(_graph.get_vertex_list().pick_random(), null)
-	next.emit()
+		var arr: Array[Vertex] = []
+		%Path.vertex_path = arr
+		await dfs(_graph.get_vertex_list().pick_random(), null)
+		to_end = false
+	else:
+		next.emit()
 
 
 
 func dfs(current: Vertex, in_edge: Edge ):
+	if not is_instance_valid(current): return
 	current.data["current"] = "WALK"
 	
 	if in_edge: in_edge.data["walked"] = true
 	for edge in current.get_edge_list():
 		if not edge.data.get("walked", false):
-			await next
+			if not to_end: await next
 			if not is_instance_valid(current): return
 			
 			current.data["current"] = "IDLE"
@@ -78,7 +89,8 @@ func dfs(current: Vertex, in_edge: Edge ):
 		in_edge.another(current).data["current"] = "BACK"
 		sql+=1
 		in_edge.data["SEQ"] = sql
-	await next
+	%Path.vertex_path.append(current)
+	if not to_end: await next
 	if not is_instance_valid(current): return
 	
 	if in_edge: 
@@ -134,12 +146,13 @@ func control():
 
 func _on_next_pressed() -> void:
 	step()
-
+func _on_to_end_pressed() -> void:
+	step(true)
 
 
 
 func _on_case_20_pressed() -> void:
-	new_graph()
+	await new_graph()
 	_graph.parse_graph(
 "20
 30
@@ -176,7 +189,7 @@ func _on_case_20_pressed() -> void:
 
 
 func _on_case_6_pressed() -> void:
-	new_graph()
+	await new_graph()
 	_graph.parse_graph(
 "6
 7
@@ -191,12 +204,12 @@ func _on_case_6_pressed() -> void:
 
 
 func _on_custom_pressed() -> void:
-	new_graph()
+	await new_graph()
 	_graph.parse_graph(%LineEdit.text)
 
 
 func _on_case_10_pressed() -> void:
-	new_graph()
+	await new_graph()
 	_graph.parse_graph("10
 12
 0 1
@@ -211,3 +224,89 @@ func _on_case_10_pressed() -> void:
 7 8
 8 9
 9 0")
+
+
+func _on_case_30_pressed() -> void:
+	await new_graph()
+	_graph.parse_graph("30
+80
+0 1
+1 2
+2 3
+3 4
+4 5
+5 6
+6 7
+7 8
+8 9
+9 0
+10 11
+11 12
+12 13
+13 14
+14 15
+15 16
+16 17
+17 18
+18 19
+19 10
+20 21
+21 22
+22 23
+23 24
+24 25
+25 26
+26 27
+27 28
+28 29
+29 20
+0 10
+0 11
+1 11
+1 12
+2 12
+2 13
+3 13
+3 14
+4 14
+4 15
+5 15
+5 16
+6 16
+6 17
+7 17
+7 18
+8 18
+8 19
+9 19
+9 10
+10 20
+10 21
+11 21
+11 22
+12 22
+12 23
+13 23
+13 24
+14 24
+14 25
+15 25
+15 26
+16 26
+16 27
+17 27
+17 28
+18 28
+18 29
+19 29
+19 20
+20 22
+21 23
+22 24
+23 25
+24 26
+25 27
+26 28
+27 29
+28 20
+29 21")

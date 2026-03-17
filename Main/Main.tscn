@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://br7ev5dfqshnn" path="res://Main/main.gd" id="1_83ytx"]
 [ext_resource type="Script" uid="uid://bumhy3mrmss24" path="res://Entity/ForceGraph/force_graph.gd" id="1_lxy7q"]
+[ext_resource type="PackedScene" uid="uid://c15y7h05fph03" path="res://Main/Path.tscn" id="3_amygn"]
 
 [node name="Main" type="Node2D" unique_id=2109162126]
 script = ExtResource("1_83ytx")
@@ -19,11 +20,19 @@ grow_vertical = 2
 [node name="Next" type="Button" parent="CanvasLayer/Control" unique_id=564687129]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 576.0
+offset_left = 555.0
 offset_top = 17.0
 offset_right = 625.0
-offset_bottom = 48.0
+offset_bottom = 50.0
 text = "NEXT"
+
+[node name="TO_END" type="Button" parent="CanvasLayer/Control" unique_id=995974382]
+layout_mode = 0
+offset_left = 906.0
+offset_top = 19.0
+offset_right = 1078.0
+offset_bottom = 50.0
+text = "ToEnd"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control" unique_id=1558421738]
 layout_mode = 1
@@ -54,6 +63,10 @@ text = "10 vertex"
 layout_mode = 2
 text = "20 vertex"
 
+[node name="case30" type="Button" parent="CanvasLayer/Control/VBoxContainer" unique_id=1933869343]
+layout_mode = 2
+text = "30 vertex"
+
 [node name="custom" type="Button" parent="CanvasLayer/Control/VBoxContainer" unique_id=1279396355]
 layout_mode = 2
 text = "custom"
@@ -76,8 +89,15 @@ metadata/_custom_type_script = "uid://bumhy3mrmss24"
 [node name="Camera2D" type="Camera2D" parent="." unique_id=325616736]
 zoom = Vector2(0.51, 0.51)
 
+[node name="Container" type="Node2D" parent="." unique_id=1926631024]
+
+[node name="Path" parent="." unique_id=1702202056 instance=ExtResource("3_amygn")]
+unique_name_in_owner = true
+
 [connection signal="pressed" from="CanvasLayer/Control/Next" to="." method="_on_next_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/TO_END" to="." method="_on_to_end_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/case6" to="." method="_on_case_6_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/case10" to="." method="_on_case_10_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/case20" to="." method="_on_case_20_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/case30" to="." method="_on_case_30_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/custom" to="." method="_on_custom_pressed"]

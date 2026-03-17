@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://c15y7h05fph03"]
+
+[ext_resource type="Script" uid="uid://cltbdegs6ra7w" path="res://Main/path.gd" id="1_0upsu"]
+[ext_resource type="Shader" uid="uid://bu1do8v1vnrc8" path="res://Main/Path.gdshader" id="1_pxkv2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3v26h"]
+shader = ExtResource("1_pxkv2")
+
+[sub_resource type="Gradient" id="Gradient_pxkv2"]
+
+[node name="Path" type="Line2D" unique_id=1702202056]
+material = SubResource("ShaderMaterial_3v26h")
+points = PackedVector2Array(20, 18, 413, -45)
+width = 50.0
+default_color = Color(0.9999996, 0.1321091, 0.85667944, 1)
+gradient = SubResource("Gradient_pxkv2")
+texture_mode = 2
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("1_0upsu")
