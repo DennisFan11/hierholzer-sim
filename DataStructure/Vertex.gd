@@ -1,5 +1,5 @@
 class_name Vertex
-extends RefCounted
+extends Object
 
 var vertex_id: int
 
@@ -19,7 +19,8 @@ func get_edge_list()-> Array[Edge]:
 	return _edge_list
 
 
-
+## 客製化資料
+var data: Dictionary = {}
 
 
 

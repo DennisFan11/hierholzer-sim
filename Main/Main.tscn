@@ -1,3 +1,35 @@
 [gd_scene format=3 uid="uid://c5fy5wjg00jyh"]
 
+[ext_resource type="Script" uid="uid://br7ev5dfqshnn" path="res://Main/main.gd" id="1_83ytx"]
+[ext_resource type="Script" uid="uid://bumhy3mrmss24" path="res://Entity/ForceGraph/force_graph.gd" id="1_lxy7q"]
+
 [node name="Main" type="Node2D" unique_id=2109162126]
+script = ExtResource("1_83ytx")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1860393293]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=354529184]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="case30" type="Button" parent="CanvasLayer/Control" unique_id=1253659602]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 45.0
+offset_right = 192.0
+offset_bottom = 76.0
+text = "30 vertex test data"
+
+[node name="ForceGraph" type="Node2D" parent="." unique_id=1329134909]
+unique_name_in_owner = true
+script = ExtResource("1_lxy7q")
+metadata/_custom_type_script = "uid://bumhy3mrmss24"
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=325616736]
+zoom = Vector2(0.51, 0.51)
+
+[connection signal="pressed" from="CanvasLayer/Control/case30" to="." method="_on_case_30_pressed"]

@@ -1,5 +1,5 @@
 class_name Edge
-extends RefCounted
+extends Object
 
 signal _dead
 var _graph: Graph
@@ -18,4 +18,4 @@ var vertex_b: Vertex:
 		vertex_b = new
 
 ## 客製化資料
-var data: Variant
+var data: Dictionary = {}

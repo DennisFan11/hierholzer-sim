@@ -3,7 +3,8 @@ extends RefCounted
 
 
 
-
+signal new_vertex(vertex: Vertex)
+signal new_edge(edge: Edge)
 
 
 var _vertex_list: Dictionary[int, Vertex]
@@ -16,7 +17,9 @@ func get_vertex_list()-> Array[Vertex]:
 	return _vertex_list.values()
 
 func add_vertex(vertex_id: int):
-	_vertex_list.set(vertex_id, Vertex.new(self, vertex_id))
+	var vertex := Vertex.new(self, vertex_id)
+	_vertex_list.set(vertex_id, vertex)
+	new_vertex.emit(vertex)
 
 func add_edge(vertex_a_id: int, vertex_b_id: int):
 	if not _vertex_list.has(vertex_a_id):
@@ -32,6 +35,8 @@ func add_edge(vertex_a_id: int, vertex_b_id: int):
 	_edge_list.append(edge)
 	_vertex_list[vertex_a_id]._edge_list.append(edge)
 	_vertex_list[vertex_b_id]._edge_list.append(edge)
+	
+	new_edge.emit(edge)
 
 
 func remove_vertex_byinstance(vertex: Vertex):
@@ -39,14 +44,18 @@ func remove_vertex_byinstance(vertex: Vertex):
 	_vertex_list.erase(vertex.vertex_id)
 	for edge in vertex.get_edge_list().duplicate(true):
 		remove_edge_byinstance(edge)
+	vertex.free()
 
 func remove_edge_byinstance(edge: Edge):
 	edge._dead.emit()
 	_edge_list.erase(edge)
 	edge.vertex_a._edge_list.erase(edge)
 	edge.vertex_b._edge_list.erase(edge)
+	edge.free()
 	
-
+func clear():
+	for i in _vertex_list.duplicate(true).values():
+		remove_vertex_byinstance(i)
 
 """
 格式:
@@ -54,8 +63,8 @@ func remove_edge_byinstance(edge: Edge):
 	int # edge count
 	int int # edge
 """
-static func parse_graph(input: String) -> Graph:
-	var graph := Graph.new()
+func parse_graph(input: String)-> void:
+	var graph = self
 	
 	# 將換行與 Tab 統一替換為空格，並過濾掉連續的空字串
 	var clean_input := input.replace("\n", " ").replace("\r", " ").replace("\t", " ")
@@ -63,8 +72,7 @@ static func parse_graph(input: String) -> Graph:
 	
 	if tokens.size() < 2:
 		push_error("Graph 格式錯誤：輸入資料不足")
-		return graph
-		
+		return
 	var vertex_count := tokens[0].to_int()
 	var edge_count := tokens[1].to_int()
 	
@@ -85,4 +93,4 @@ static func parse_graph(input: String) -> Graph:
 		graph.add_edge(vertex_a_id, vertex_b_id)
 		token_idx += 2
 		
-	return graph
+	#return graph

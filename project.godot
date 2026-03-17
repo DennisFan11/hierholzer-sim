@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="HierholzerSim"
+run/main_scene="uid://c5fy5wjg00jyh"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/stretch/mode="canvas_items"
 
 [physics]
 

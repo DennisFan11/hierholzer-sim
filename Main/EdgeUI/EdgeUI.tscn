@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://b423spscijkqb"]
+
+[ext_resource type="Script" uid="uid://cgfwbsj84vheo" path="res://Main/EdgeUI/edge_ui.gd" id="1_4pay7"]
+
+[node name="EdgeUI" type="Node2D" unique_id=694847810]
+script = ExtResource("1_4pay7")
+
+[node name="Line2D" type="Line2D" parent="." unique_id=396799672]
+unique_name_in_owner = true
